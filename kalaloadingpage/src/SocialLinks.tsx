@@ -1,28 +1,28 @@
 import React from 'react';
-import instagram from './instagram.png';
+import instagram from './instagram.svg';
 import facebook from './FacebookLogo.png';
 import linkedIn from './LI-In-Bug.png';
 import { Container, Col, Row } from 'reactstrap';
 
 export default function SocialLinks() {
     const imageCss = {
-        width: "20px",
+        width: "50px",
         height: "auto"
     }
     const fbPress = () => {
-        setTimeout(function () { window.location.href = "https://www.facebook.com"; }, 25);
-        window.location.href = "fb://";
+        setTimeout(function () { window.location.href = "https://www.facebook.com/Kala_decor-106973361184646/"; }, 25);
+        window.location.href = "fb://Kala_decor-106973361184646/";
     }
     const liPress = () => {
-        setTimeout(function () { window.location.href = "https://www.linkedIn.com"; }, 25);
-        window.location.href = "linkedin://";
+        setTimeout(function () { window.location.href = "https://www.linkedin.com/company/kala-design"; }, 25);
+        window.location.href = "linkedin://company/kala-design";
     }
     const instaPress = () => {
-        setTimeout(function () { window.location.href = "https://www.instagram.com"; }, 25);
-        window.location.href = "fb://";
+        setTimeout(function () { window.location.href = "https://www.instagram.com/_kala.decor?r=nametag"; }, 25);
+        window.location.href = "instagram://_kala.decor?r=nametag";
     }
     const contStyle = {
-        width: '150px'
+        width: '240px'
     }
     return (
         <Container style={contStyle}>

@@ -8,11 +8,42 @@
   height:100vh;
 }
 
+.loading {
+  font-size: 1.7em;
+  padding-top: 10vh;
+  font-stretch: extra-condensed;
+}
+
+.loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;
+  animation: ellipsis steps(4,end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 20px;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 20px;
+  }
+}
+
 .Logo {
   margin: auto;
-  padding: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom:15px;
   width: 250px;
-  max-width: 40%;
+  max-width: 50%;
   height: auto;
 }
 
@@ -20,21 +51,21 @@
 
 .middle {
   margin-left: 10%;
-  margin-top: 8%;
+  margin-top: 10vh;
   margin-right: 10%;
-  font-size: 1.5em;
+  font-size: 1em;
   left: 50%;
   top: 50%;
 }
 
-.p {
-  margin-top: 1%;
-}
-
 .form {
-  margin-top: 10%;
+  margin-top: 3%;
 }
 
 .social {
-  margin-top: 8%;
+  margin-top: 10vh;
+}
+
+.slogan {
+  font-size: 1.2em;
 }
