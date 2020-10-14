@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button, Modal, Spinner} from 'reactstrap';
+import { Input, Button, Spinner} from 'reactstrap';
 
 async function getKey() {
     let request = await fetch('https://kalalandingpage.pythonanywhere.com/key')
