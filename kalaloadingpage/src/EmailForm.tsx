@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button, Spinner} from 'reactstrap';
+import { Input, Button} from 'reactstrap';
 
 async function getKey() {
     let request = await fetch('https://kalalandingpage.pythonanywhere.com/key')
@@ -26,30 +26,28 @@ export default function EmailForm() {
     const [email, changeEmail] = useState('');
     const [adding, changeAdding] = useState(false);
     const [error, changeError] = useState(false);
-    let regEmail: RegExp = new RegExp('^[^@s]+@[^@s.]+.[^@.s]+$')
+    const [success, changeSuccess] = useState(false);
     const handleChange = (e: any) => {
         changeEmail(e.target.value);
     }
-
+    function timeout(delay: number) {
+        return new Promise( res => setTimeout(res, delay) );}
     const onClick = (e: any) => {
-        if (regEmail.test(email)) {
-            console.log('yes');
-            getKey()
-                .then(x => {changeAdding(true);
-                   return addEmail(email, x)})
+        changeAdding(true);
+        getKey()
+            .then(x => addEmail(email, x))
                 .then(response => {
                     changeAdding(false)
-                    console.log(response);
-                });
-
-        } else {
-            changeError(true);
-        }
+                    if (response.status === 200) {
+                        changeSuccess(true);
+                        return timeout(1000);
+                    } else {
+                        changeError(true);
+                        return timeout(1000);
+                    }
+                }).then(() => {changeSuccess(false)
+                    changeError(false)});
     }
-    if(error) {
-        console.log('error');
-    }
-
     const inputStyle={
         display: "inline-block",
         width: "200px",
@@ -58,19 +56,13 @@ export default function EmailForm() {
     const buttonStyle={
         display: "inline-block"
     }
-    const parent = {
+
+    if(error || adding || success) {
 
     }
-    if (adding) {
-        return (
-            <div style={parent}>
-            <Input style={inputStyle} onChange={handleChange} value={email} placeholder="Email Address"/>
-            <Spinner style={buttonStyle} color="primary"/>
-        </div>
-        )
-    }
+
     return (
-        <div style={parent}>
+        <div>
             <Input style={inputStyle} onChange={handleChange} value={email} placeholder="Email Address"/>
             <Button style={buttonStyle} color="primary" active={false} onClick={onClick}>Notify Me</Button>
         </div>
