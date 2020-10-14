@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button} from 'reactstrap';
+import { Input, Button, Modal, Spinner} from 'reactstrap';
 
 async function getKey() {
     let request = await fetch('https://kalalandingpage.pythonanywhere.com/key')
@@ -8,7 +8,7 @@ async function getKey() {
 }
 
 async function addEmail(email: string, key: any) {
-    fetch('https://kalalandingpage.pythonanywhere.com/addemail', {
+    let resp = fetch('https://kalalandingpage.pythonanywhere.com/addemail', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -19,6 +19,7 @@ async function addEmail(email: string, key: any) {
             Email: email,
         })
     })
+    return resp;
 }
 
 export default function EmailForm() {
@@ -32,17 +33,21 @@ export default function EmailForm() {
 
     const onClick = (e: any) => {
         if (regEmail.test(email)) {
-            changeAdding(true);
+            console.log('yes');
             getKey()
-                .then(x => addEmail(email, x))
-                .then(response => changeAdding(false));
+                .then(x => {changeAdding(true);
+                   return addEmail(email, x)})
+                .then(response => {
+                    changeAdding(false)
+                    console.log(response);
+                });
 
         } else {
             changeError(true);
         }
     }
-    if(adding || error) {
-        console.log('changeState');
+    if(error) {
+        console.log('error');
     }
 
     const inputStyle={
@@ -55,6 +60,14 @@ export default function EmailForm() {
     }
     const parent = {
 
+    }
+    if (adding) {
+        return (
+            <div style={parent}>
+            <Input style={inputStyle} onChange={handleChange} value={email} placeholder="Email Address"/>
+            <Spinner style={buttonStyle} color="primary"/>
+        </div>
+        )
     }
     return (
         <div style={parent}>
