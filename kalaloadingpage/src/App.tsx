@@ -7,12 +7,14 @@ import Logo from './Kala.svg';
 function App() {
   return (
     <div className="App">
-      <img className="Logo" src={Logo} alt="Kala"/>
+      <div className="Top">
+        <img className="Logo" src={Logo} alt="Kala"/>
+      </div>
       <div>
         <p className="slogan">Online furniture shopping reinvented</p>
       </div>
-      <div>
-        <h3 className="loading">Coming Soon</h3>
+      <div className="Message">
+          <h3 className="loading">Coming Soon</h3>
       </div>
       <div>
         <p className="middle">Want to be notified as soon as it's live?</p>
@@ -20,8 +22,8 @@ function App() {
       <div className="form">
         <EmailForm/>
       </div>
-      <div>
-        <p className="p">We promise to never spam you</p>
+      <div className="small">
+        <p className="smallText">We promise to never spam you</p>
       </div>
       <div className="social">
         <p className="p">Check us out on social media:</p>
